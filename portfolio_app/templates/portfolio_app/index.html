@@ -25,39 +25,39 @@
             <div class="greeting-wrapper">
                 <h1>Hi, I'm Simeon Bogg</h1>
             </div>
-
-            {% include 'portfolio_app/navbar.html' %}
-
-            <div class="left-column">
-                <img id="profile_pic" src="{% static 'images/simeon_bogg2.jpg' %}">
-                <h5 style="text-align: center; line-height: 0;">Personalise Theme</h5>
+            <div class="intro-wrapper">
+                {% include 'portfolio_app/navbar.html' %}
                 
-                <div id="theme-options-wrapper">
-                    <div data-mode="light" id="light-mode" class="theme-dot"></div>
-                    <div data-mode="blue" id="blue-mode" class="theme-dot"></div>
-                    <div data-mode="green" id="green-mode" class="theme-dot"></div>
-                    <div data-mode="purple" id="purple-mode" class="theme-dot"></div>
-                </div>
-                <p id="settings-note">*Theme settings will be saved for<br>your next visit</p>
-            </div>
-
-            <div class="right-column">
-                <div id="preview-shadow">
-                    <div id="preview">
-                        <div id="corner-tl" class="corner"></div>
-                        <div id="corner-tr" class="corner"></div>
+                <div class="left-column">
+                    <img id="profile_pic" src="{% static 'images/simeon_bogg2.jpg' %}">
+                    <h5 style="text-align: center; line-height: 0;">Personalise Theme</h5>
                     
-                        <h3>What I Do</h3>
-                        <p>I am a backend developer from the UK,
-                            looking for my first professional role as a django developer.</p>
+                    <div id="theme-options-wrapper">
+                        <div data-mode="light" id="light-mode" class="theme-dot"></div>
+                        <div data-mode="blue" id="blue-mode" class="theme-dot"></div>
+                        <div data-mode="green" id="green-mode" class="theme-dot"></div>
+                        <div data-mode="purple" id="purple-mode" class="theme-dot"></div>
+                    </div>
+                    <p id="settings-note">*Theme settings will be saved for<br>your next visit</p>
+                </div>
 
-                        <div id="corner-bl" class="corner"></div>
-                        <div id="corner-br" class="corner"></div>    
+                <div class="right-column">
+                    <div id="preview-shadow">
+                        <div id="preview">
+                            <div id="corner-tl" class="corner"></div>
+                            <div id="corner-tr" class="corner"></div>
+                        
+                            <h3>What I Do</h3>
+                            <p>I am a backend developer from the UK,
+                                looking for my first professional role as a django developer.</p>
+
+                            <div id="corner-bl" class="corner"></div>
+                            <div id="corner-br" class="corner"></div>    
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+    </div>
         </div>
     </section>
 
@@ -111,39 +111,23 @@
             <h3 style="text-align: center;">Some of my past projects</h3>
 
             <div class="post-wrapper">
+                {% for post in posts %}
                 <div>
                     <div class="post">
                         <img class="thumbnail" src="{% static 'images/simeon_bogg.jpeg' %}">
                         <div class="post-preview">
-                            <h6 class="post-title">Post Title</h6>
-                            <p class="post-intro">This is a sentence. It is describing the project</p>
-                            <a href="post.html">Read More</a>
+                            <h6 class="post-title">{{post.heading}}</h6>
+                            <p class="post-intro">{{post.sub_heading}}</p>
+                            <a href="{% url 'post' post.id %}">Read More</a>
+                            <hr>
+                                {% for tag in post.tags.all %}
+                                    <span class="tag">{{tag}}</span>
+                                {% endfor %}
+                            <hr>
                         </div>
                     </div>
                 </div>
-
-                <div>
-                    <div class="post">
-                        <img class="thumbnail" src="{% static 'images/simeon_bogg.jpeg' %}">
-                        <div class="post-preview">
-                            <h6 class="post-title">Post Title</h6>
-                            <p class="post-intro">This is a sentence. It is describing the project</p>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="post">
-                        <img class="thumbnail" src="{% static 'images/simeon_bogg.jpeg' %}">
-                        <div class="post-preview">
-                            <h6 class="post-title">Post Title</h6>
-                            <p class="post-intro">This is a sentence. It is describing the project</p>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
             <p style="text-align: center">
                 <a href="{% url 'posts' %}">View More</a>    

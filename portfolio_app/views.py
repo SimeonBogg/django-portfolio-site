@@ -1,31 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Post
+
 # Create your views here.
 def home(request):
-    return render(request, 'portfolio_app/index.html')
+    posts = Post.objects.filter(active=True, featured=True)[0:3]
+
+    context = {'posts': posts}
+    return render(request, 'portfolio_app/index.html', context)
 
 def posts(request):
-
-    posts = [
-        {
-            'headline':'Django Portfolio Site',
-            'sub_headline':'I gave my static HTML/CSS portfolio site a Django makeover.'
-         },
-         {
-            'headline':'Second Project',
-            'sub_headline':'Text describing my second project. Probably an online store.'
-         },
-         {
-            'headline':'Third Project',
-            'sub_headline':'Text describing my second project. Probably a food delivery API.'
-         },
-    ]
+    posts = Post.objects.filter(active=True)
     context = {'posts': posts}
     return render(request, 'portfolio_app/posts.html', context)
 
-def post(request):
-    return render(request, 'portfolio_app/post.html')
+def post(request, pk):
+    post = Post.objects.get(id=pk)
+    context = {'post': post}
+
+    return render(request, 'portfolio_app/post.html', context)
 
 def profile(request):
     return render(request, 'portfolio_app/profile.html')
