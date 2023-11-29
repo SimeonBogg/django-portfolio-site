@@ -7,11 +7,11 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
     
-    
+
 class Post(models.Model):
     heading = models.CharField(max_length=200)
     sub_heading = models.CharField(max_length=200, null=True, blank=True)
-    #thumbnail =
+    thumbnail = models.ImageField(null=True, blank=True, upload_to="images", default="placeholder.png")
     body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
