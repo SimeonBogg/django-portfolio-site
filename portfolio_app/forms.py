@@ -10,5 +10,5 @@ class PostForm(ModelForm):
         fields = '__all__'
 
         widgets = {
-            'tags':forms.CheckboxSelectMultiple(),
-        }
+			'tags':forms.CheckboxSelectMultiple(),
+		}
