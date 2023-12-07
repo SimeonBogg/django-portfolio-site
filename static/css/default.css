@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
 }
 
-p, li, span, label, textarea {
+p, li, span, label, textarea, .input-field {
     color: var(--secondaryText);
     font-family: 'Roboto Mono', monospace;
 }
@@ -372,6 +372,7 @@ ul {
     border: 1px solid var(--borderColor);
     font-size: 14px;
 }
+
 
 #submit-btn {
     margin-top: 10px;

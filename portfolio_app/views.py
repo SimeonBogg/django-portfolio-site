@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 from .models import Post
 from .forms import PostForm
 from .filters import PostFilter
@@ -80,3 +84,27 @@ def deletePost(request, pk):
         return redirect('posts')
     context = {'item':post}
     return render(request, 'portfolio_app/delete.html', context)
+
+
+def sendEmail(request):
+
+    if request.method == 'POST':
+
+        template = render_to_string('portfolio_app/email_template.html', {
+            'name': request.POST['name'],
+            'email': request.POST['email'],
+            'message': request.POST['message'],
+        })
+
+        email = EmailMessage(
+            request.POST['subject'],
+            template,
+            settings.EMAIL_HOST_USER,
+            ['simeonbogg@gmail.com']
+
+        )
+
+        email.fail_silently = False
+        email.send()
+
+    return render(request, 'portfolio_app/email_sent.html')
