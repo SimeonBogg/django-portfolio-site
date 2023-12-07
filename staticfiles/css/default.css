@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
 }
 
-p, li, span, label, input, textarea {
+p, li, span, label, textarea, .input-field {
     color: var(--secondaryText);
     font-family: 'Roboto Mono', monospace;
 }
@@ -300,6 +300,7 @@ ul {
     gap: 20px;
     justify-content: center;
     padding-bottom: 50px;
+    margin: 0 auto;
 }
 
 .thumbnail {
@@ -332,7 +333,7 @@ ul {
     font-size: 14px;
 }
 
-.tag {
+.post-preview .tag {
     display: inline-block;
     color: #fff;
     background-color: #888;
@@ -371,6 +372,7 @@ ul {
     border: 1px solid var(--borderColor);
     font-size: 14px;
 }
+
 
 #submit-btn {
     margin-top: 10px;

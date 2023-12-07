@@ -7,6 +7,6 @@
 
     <h4>{{post.sub_heading}}</h4>
     
-    <p>{{post.body|linebreaks}}</p>
+    <p>{{post.body|safe}}</p>
 </div>
 {% endblock content %}
