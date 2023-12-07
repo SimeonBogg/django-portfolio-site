@@ -36,8 +36,8 @@ def posts(request):
     context = {'posts': posts, 'myFilter': myFilter}
     return render(request, 'portfolio_app/posts.html', context)
 
-def post(request, pk):
-    post = Post.objects.get(id=pk)
+def post(request, slug):
+    post = Post.objects.get(slug=slug)
     context = {'post': post}
 
     return render(request, 'portfolio_app/post.html', context)
@@ -62,8 +62,8 @@ def createPost(request):
 
 
 @login_required(login_url="home")
-def updatePost(request, pk):
-    post = Post.objects.get(id=pk)
+def updatePost(request, slug):
+    post = Post.objects.get(slug=slug)
     form = PostForm(instance=post)
 
     if request.method == "POST":
@@ -77,8 +77,8 @@ def updatePost(request, pk):
 
 
 @login_required(login_url="home")
-def deletePost(request, pk):
-    post = Post.objects.get(id=pk)
+def deletePost(request, slug):
+    post = Post.objects.get(slug=slug)
     if request.method == 'POST':
         post.delete()
         return redirect('posts')
