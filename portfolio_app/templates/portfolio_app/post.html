@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="main-container">
-    <img src="{% static 'images/simeon_bogg.jpeg' %}">
+    <img src="{{post.thumbnail.url}}">
     <h1>{{post.heading}}</h1>
 
     <h4>{{post.sub_heading}}</h4>

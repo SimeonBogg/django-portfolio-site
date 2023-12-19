@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$jmp=i0f6tu=5m9o*lc5ah4l6eo2rh^(%bx0c0)yw(pl$_@j8o'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'ckeditor',
     'ckeditor_uploader',
+    'storages',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -88,10 +93,15 @@ WSGI_APPLICATION = 'django_portfolio.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': {
+    'ENGINE': 'django_psdb_engine',
+    'NAME': config('DB_NAME'),
+    'HOST': config('DB_HOST'),
+    'PORT': config('DB_PORT'),
+    'USER': config('DB_USER'),
+    'PASSWORD': config('DB_PASSWORD'),
+    'OPTIONS': {'ssl': {'ca': config('MYSQL_ATTR_SSL_CA')}}
+  }
 }
 
 
@@ -160,3 +170,17 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+
+#AWS S3 Buckets Configuration
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_QUERYSTRING_AUTH = False
+
+AWS_ACCESS_KEY_ID = 'AKIA6CSFEVFJD7HVA2J5'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'simeonbogg-personal'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
