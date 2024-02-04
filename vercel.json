@@ -2,8 +2,14 @@
     "builds": [{
         "src": "django_portfolio/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.7" }
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
+
+    "framework": {
+        "name": "@vercel/python",
+        "version": "0.8.1"
+      },
+      
     "routes": [
         {
             "src": "/(.*)",
