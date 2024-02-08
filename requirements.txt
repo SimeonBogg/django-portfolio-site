@@ -12,6 +12,7 @@ django-storages==1.14.2
 jmespath==1.0.1
 pymysql==1.1.0
 Pillow==10.1.0
+psycopg2==2.8.5
 python-dateutil==2.8.2
 python-decouple==3.8
 s3transfer==0.8.2
