@@ -94,13 +94,13 @@ WSGI_APPLICATION = 'django_portfolio.wsgi.application'
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.mysql',
+    'ENGINE': 'django.db.backends.postgresql',
     'NAME': config('DB_NAME'),
     'HOST': config('DB_HOST'),
     'PORT': config('DB_PORT'),
     'USER': config('DB_USER'),
     'PASSWORD': config('DB_PASSWORD'),
-    'OPTIONS': {'ssl': {'ca': config('MYSQL_ATTR_SSL_CA')}}
+    
   }
 }
 
